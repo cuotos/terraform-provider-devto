@@ -1,0 +1,30 @@
+tasks:
+  tfrc:
+    run: 
+      command:
+        exec: envsubst < dev.tfrc.tpl > tf_files/dev.tfrc
+    
+  build:
+    run: go build -o dist/terraform-provider-devto
+
+  test:
+    run: go test ./...
+
+  init:
+    run:
+      - task: tfrc
+      - task: build
+      - command:
+          exec: TF_CLI_CONFIG_FILE=dev.tfrc terraform init
+          dir: ./tf_files
+  plan:
+    run:
+      command:
+        exec: TF_CLI_CONFIG_FILE=dev.tfrc terraform plan
+        dir: ./tf_files
+
+  apply:
+    run:
+      command:
+        exec: TF_CLI_CONFIG_FILE=dev.tfrc terraform apply
+        dir: ./tf_files
