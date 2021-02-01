@@ -52,7 +52,7 @@ func resourceArticleCreate(ctx context.Context, data *schema.ResourceData, m int
 
 	createdArticle, err := client.CreateArticle(article)
 	if err != nil {
-		diag.FromErr(err)
+		return diag.FromErr(err)
 	}
 
 	data.SetId(fmt.Sprintf("%d", createdArticle.ID))
