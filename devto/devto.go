@@ -38,7 +38,8 @@ func resourceArticle() *schema.Resource {
 }
 
 func resourceArticleCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	client := m.(*devto.API)
+
+	client := m.(*devto.Client)
 
 	title := data.Get("title").(string)
 	bodyMarkdown := data.Get("markdown_body").(string)
@@ -61,7 +62,7 @@ func resourceArticleCreate(ctx context.Context, data *schema.ResourceData, m int
 }
 
 func resourceArticleRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	client := m.(*devto.API)
+	client := m.(*devto.Client)
 
 	id, err := strconv.Atoi(data.Id())
 	if err != nil {
@@ -83,7 +84,7 @@ func resourceArticleRead(ctx context.Context, data *schema.ResourceData, m inter
 }
 
 func resourceArticleUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	client := m.(*devto.API)
+	client := m.(*devto.Client)
 
 	title := data.Get("title").(string)
 	bodyMarkdown := data.Get("markdown_body").(string)
