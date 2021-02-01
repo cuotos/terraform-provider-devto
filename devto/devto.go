@@ -51,7 +51,7 @@ func resourceArticleCreate(ctx context.Context, data *schema.ResourceData, m int
 		Published:    published,
 	}
 
-	createdArticle, err := client.CreateArticle(article)
+	createdArticle, _, err := client.CreateArticle(article)
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -69,7 +69,7 @@ func resourceArticleRead(ctx context.Context, data *schema.ResourceData, m inter
 		return diag.FromErr(err)
 	}
 
-	article, found, err := client.GetUserArticleByID(id)
+	article, found, _, err := client.GetUserArticleByID(id)
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -99,7 +99,7 @@ func resourceArticleUpdate(ctx context.Context, data *schema.ResourceData, m int
 		return diag.FromErr(err)
 	}
 
-	createdArticle, err := client.UpdateArticle(id, article)
+	createdArticle, _, err := client.UpdateArticle(id, article)
 	if err != nil {
 		diag.FromErr(err)
 	}

@@ -15,8 +15,12 @@ variable "api_key" {
   type = string
 }
 
-resource "devto_article" "test"{
-  title = "dp-test"
-  markdown_body = "This is the body of the post"
+resource "devto_article" "one"{
+  title = "dp-test-two"
+  markdown_body = <<EOT
+## Subtitle
+This is the body of the post
+
+EOT
   published = false
 }
